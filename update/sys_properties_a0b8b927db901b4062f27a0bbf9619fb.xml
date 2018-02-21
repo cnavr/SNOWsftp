@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<record_update table="sys_properties">
+    <sys_properties action="INSERT_OR_UPDATE">
+        <choices/>
+        <description>number of checkings until out file is processed</description>
+        <ignore_cache>false</ignore_cache>
+        <is_private>false</is_private>
+        <name>x_tieoy_sftp_integ.out_check_num</name>
+        <read_roles/>
+        <suffix>out_check_num</suffix>
+        <sys_class_name>sys_properties</sys_class_name>
+        <sys_created_by>admin.xxnavrac</sys_created_by>
+        <sys_created_on>2018-02-21 14:26:46</sys_created_on>
+        <sys_customer_update>false</sys_customer_update>
+        <sys_id>a0b8b927db901b4062f27a0bbf9619fb</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_name>x_tieoy_sftp_integ.out_check_num</sys_name>
+        <sys_package display_value="SFTP Integration" source="x_tieoy_sftp_integ">01d988b6dbc8dfc0107172e9bf96195e</sys_package>
+        <sys_policy/>
+        <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
+        <sys_scope display_value="SFTP Integration">01d988b6dbc8dfc0107172e9bf96195e</sys_scope>
+        <sys_update_name>sys_properties_a0b8b927db901b4062f27a0bbf9619fb</sys_update_name>
+        <sys_updated_by>admin.xxnavrac</sys_updated_by>
+        <sys_updated_on>2018-02-21 15:03:13</sys_updated_on>
+        <type>integer</type>
+        <value>10</value>
+        <write_roles/>
+    </sys_properties>
+    <sys_translated_text action="delete_multiple" query="documentkey=a0b8b927db901b4062f27a0bbf9619fb"/>
+</record_update>

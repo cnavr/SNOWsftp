@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<record_update table="wf_element_activity">
+    <wf_element_activity action="INSERT_OR_UPDATE">
+        <access>public</access>
+        <attributes/>
+        <base_provider display_value="SFTP">93df5731bf200200d4dfd69f9a073963</base_provider>
+        <category/>
+        <checked_out_by/>
+        <default_height/>
+        <default_width/>
+        <description>&#13;
+This activity copies files between SFTP servers.&#13;
+Required inputs:&#13;
+    -sourceHost&#13;
+    -sourceFilePath (A full path for the source file name, such as /tmp/test_data/file1.txt)&#13;
+    -targetHost&#13;
+    -targetFilePath (A full path for target file name, such as /tmp/test_data/file1.txt)&#13;
+    -sourceCredentialTag&#13;
+    -targetCredentialTag&#13;
+Optional inputs:&#13;
+    -sourcePort (default=22)&#13;
+    - tempFileSuffix (default=blank)&#13;
+If you enter a value for the tempFileSuffix field, the activity attempts to delete the current target file if it exists, and then copy the source file to a temporary file, using the format targetFilePath + tempFileSuffix. The activity then renames the file to the actual target file name.&#13;
+</description>
+        <image>images/heisenberg_icons/workflow_ie8/provider_sftp.png</image>
+        <input_meta>{"name":"Input","type":"DATA_OBJECT","properties":[{"name":"SourceFilePath","type":"STRING","mandatory":true},{"name":"targetHost","type":"STRING","mandatory":true},{"name":"targetPort","type":"INTEGER","mandatory":false},{"name":"targetFilePath","type":"STRING","mandatory":true},{"name":"tempFileSuffix","type":"STRING","mandatory":false},{"name":"sourceCredentialTag","type":"STRING","mandatory":true},{"name":"targetCredentialTag","type":"STRING","mandatory":true},{"name":"sourceHost","type":"STRING","mandatory":true}]}</input_meta>
+        <input_process_script/>
+        <input_transform>{"command":"Copy file","source":"${activityInput.sourceHost}","source_port":"${activityInput.sourcePort}","source_directory":"","source_files":"","excluded_files":"","source_file_path":"${activityInput.SourceFilePath}","target_host":"${activityInput.targetHost}","target_port":"${activityInput.targetPort}","target_directory":"","target_file_path":"${activityInput.targetFilePath}","temp_file_postfix":"${activityInput.tempFileSuffix}","is_directory":"false","include_subfolders":"false","file_attribute_uid":"","file_attribute_gid":"","file_attribute_permissions":"","file_attribute_atime":"","file_attribute_mtime":"","file_attribute_size":"","source_credential_tag":"${activityInput.sourceCredentialTag}","target_credential_tag":"${activityInput.targetCredentialTag}","midCapabilities":"1566310bdb84d304107172e9bf961962"}</input_transform>
+        <local_variables/>
+        <name>SFTPcopy</name>
+        <output_meta>{"name":"Output","type":"DATA_OBJECT","properties":[{"name":"errorMessage","type":"STRING"},{"name":"result","type":"STRING"}]}</output_meta>
+        <output_process_script/>
+        <output_transform>[{"toLink":"activityOutput.errorMessage","description":"","to":"errorMessage","toType":"string","toDestination":"activityOutput","sourceLabel":"executionResult.errorMessages","from":"${executionResult.errorMessages}","fromSource":"executionResult","type":"Direct","children":"[]","translation":""},{"toLink":"activityOutput.result","description":"","to":"result","toType":"string","toDestination":"activityOutput","sourceLabel":"executionResult.output","from":"${executionResult.output}","fromSource":"executionResult","type":"Direct","children":"[]","translation":""}]</output_transform>
+        <processing_script/>
+        <sample_payloads>{}</sample_payloads>
+        <short_description>Copy a single file from one SFTP server to another.</short_description>
+        <style/>
+        <sys_class_name>wf_element_activity</sys_class_name>
+        <sys_created_by>admin.xxernyeo</sys_created_by>
+        <sys_created_on>2018-02-07 15:48:33</sys_created_on>
+        <sys_customer_update>false</sys_customer_update>
+        <sys_id>0225064bdb48d304107172e9bf9619aa</sys_id>
+        <sys_mod_count>2</sys_mod_count>
+        <sys_name>SFTPcopy</sys_name>
+        <sys_package display_value="SFTP Integration" source="x_tieoy_sftp_integ">01d988b6dbc8dfc0107172e9bf96195e</sys_package>
+        <sys_policy/>
+        <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
+        <sys_scope display_value="SFTP Integration">01d988b6dbc8dfc0107172e9bf96195e</sys_scope>
+        <sys_update_name>wf_element_activity_0225064bdb48d304107172e9bf9619aa</sys_update_name>
+        <sys_updated_by>admin.xxernyeo</sys_updated_by>
+        <sys_updated_on>2018-02-08 09:16:44</sys_updated_on>
+        <version_container_id>d088b1cfdb84d304107172e9bf96199a</version_container_id>
+    </wf_element_activity>
+    <sys_translated_text action="delete_multiple" query="documentkey=0225064bdb48d304107172e9bf9619aa"/>
+    <wf_versionable action="INSERT_OR_UPDATE">
+        <checked_out/>
+        <checked_out_by/>
+        <published>true</published>
+        <sys_created_by>admin.xxernyeo</sys_created_by>
+        <sys_created_on>2018-02-07 15:48:33</sys_created_on>
+        <sys_id>0a25064bdb48d304107172e9bf9619aa</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_updated_by>admin.xxernyeo</sys_updated_by>
+        <sys_updated_on>2018-02-08 09:16:44</sys_updated_on>
+        <valid_from>2018-02-08 09:16:44</valid_from>
+        <valid_to/>
+        <version>2</version>
+        <version_container_id>d088b1cfdb84d304107172e9bf96199a</version_container_id>
+        <wf_element_definition display_value="SFTPcopy">0225064bdb48d304107172e9bf9619aa</wf_element_definition>
+    </wf_versionable>
+    <wf_condition_default action="INSERT_OR_UPDATE">
+        <activity_definition display_value="SFTPcopy">0225064bdb48d304107172e9bf9619aa</activity_definition>
+        <condition/>
+        <derived_definition>b20af583dbc4d304107172e9bf961966</derived_definition>
+        <else_flag>false</else_flag>
+        <error>false</error>
+        <event>false</event>
+        <event_name/>
+        <name>Failure</name>
+        <order>200</order>
+        <short_description/>
+        <skip_during_generate>false</skip_during_generate>
+        <sys_created_by>admin.xxernyeo</sys_created_by>
+        <sys_created_on>2018-02-07 15:48:33</sys_created_on>
+        <sys_id>0625064bdb48d304107172e9bf9619ab</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin.xxernyeo</sys_updated_by>
+        <sys_updated_on>2018-02-07 15:48:33</sys_updated_on>
+    </wf_condition_default>
+    <wf_condition_default action="INSERT_OR_UPDATE">
+        <activity_definition display_value="SFTPcopy">0225064bdb48d304107172e9bf9619aa</activity_definition>
+        <condition>activityOutput.errorMessages == null &amp;&amp; activityOutput.result != null</condition>
+        <derived_definition>83f9f583dbc4d304107172e9bf9619d3</derived_definition>
+        <else_flag>false</else_flag>
+        <error>false</error>
+        <event>false</event>
+        <event_name/>
+        <name>Success</name>
+        <order>100</order>
+        <short_description/>
+        <skip_during_generate>false</skip_during_generate>
+        <sys_created_by>admin.xxernyeo</sys_created_by>
+        <sys_created_on>2018-02-07 15:48:33</sys_created_on>
+        <sys_id>ce25064bdb48d304107172e9bf9619aa</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin.xxernyeo</sys_updated_by>
+        <sys_updated_on>2018-02-07 15:48:33</sys_updated_on>
+    </wf_condition_default>
+    <wf_versionable action="update_multiple" query="version_container_id=d088b1cfdb84d304107172e9bf96199a^sys_id!=0a25064bdb48d304107172e9bf9619aa^version&lt;2">
+        <published>false</published>
+    </wf_versionable>
+    <wf_activity action="update_multiple" is_dot_walk_query="true" query="workflow_version.published=true^activity_definition.version_container_id=d088b1cfdb84d304107172e9bf96199a">
+        <new_activity_definition>0225064bdb48d304107172e9bf9619aa</new_activity_definition>
+        <out_of_date>true</out_of_date>
+        <notes>There is a newer version of this activity.
+
+To update the activity, check out the workflow, select the activity, right click
+and select 'Update activity' to use the latest version, then publish the workflow</notes>
+    </wf_activity>
+</record_update>
