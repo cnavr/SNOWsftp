@@ -73,11 +73,11 @@
             <sum>false</sum>
             <sys_class_name>sys_ui_list</sys_class_name>
             <sys_created_by>admin.xxnavrac</sys_created_by>
-            <sys_created_on>2018-02-20 11:45:00</sys_created_on>
+            <sys_created_on>2018-02-22 08:31:41</sys_created_on>
             <sys_customer_update>false</sys_customer_update>
             <sys_domain>774190f01f1310005a3637b8ec8b70ef</sys_domain>
             <sys_domain_path>!!!/</sys_domain_path>
-            <sys_id>111ac09fdb94934062f27a0bbf96198b</sys_id>
+            <sys_id>78017977db5c9b4062f27a0bbf9619ae</sys_id>
             <sys_mod_count>0</sys_mod_count>
             <sys_name/>
             <sys_package/>
@@ -86,7 +86,7 @@
             <sys_scope display_value="SFTP Integration">01d988b6dbc8dfc0107172e9bf96195e</sys_scope>
             <sys_update_name/>
             <sys_updated_by>admin.xxnavrac</sys_updated_by>
-            <sys_updated_on>2018-02-20 11:45:00</sys_updated_on>
+            <sys_updated_on>2018-02-22 08:31:41</sys_updated_on>
             <sys_user display_value="Navratil Admin Ctirad">532153ecdb58dfcc6179f57eaf961913</sys_user>
             <view display_value="Diagrammer" name="diagrammer">295b14923700120015cfd3e853990edb</view>
             <view_name/>
