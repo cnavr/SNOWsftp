@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<record_update table="wf_element_activity">
+    <wf_element_activity action="INSERT_OR_UPDATE">
+        <access>public</access>
+        <attributes/>
+        <base_provider display_value="SSH">ebee8be6d7022100dfc260affd610368</base_provider>
+        <category/>
+        <checked_out_by/>
+        <default_height/>
+        <default_width/>
+        <description>The File Write activity uses SSH to write data to a file on a Linux or UNIX computer.&#13;
+&#13;
+The destination 'file' variable can be an absolute path or a relative path from the 'directory' parameter. If the destination file path is absolute, the activity ignores the 'directory' parameter. &#13;
+&#13;
+The activity 'behavior' parameter specifies how to write the file:&#13;
+* overwrite: creates the file if it does not exist and overwrites the file if it exists.&#13;
+* append: creates the file if it does not exist and appends the new content to the file if it exists.&#13;
+* create: creates the file if it does not exist and fails if the file exists.&#13;
+&#13;
+The result values assigned by this activity are: &#13;
+*Success: the activity was able to successfully write to the file.&#13;
+*Failure: the activity failed to write to the file. &#13;
+&#13;
+Keep in mind:&#13;
+*Your ServiceNow instance must have access to a MID Server configured to use SSH to run this activity.</description>
+        <image>images/heisenberg_icons/workflow_ie8/provider_ssh.png</image>
+        <input_meta>{"name":"Input","type":"DATA_OBJECT","properties":[{"name":"hostname","type":"STRING","mandatory":false},{"name":"file","type":"STRING","mandatory":false},{"name":"behavior","type":"STRING","mandatory":false},{"name":"contents","type":"STRING","mandatory":false},{"name":"TAG","type":"STRING","mandatory":false}]}</input_meta>
+        <input_process_script><![CDATA[if (activityInput.behavior == "overwrite")
+	executionParam.command = _generateOverwrite();
+else if (activityInput.behavior == "append")
+	executionParam.command = _generateAppend();
+else if (activityInput.behavior == "create")
+	executionParam.command = _generateCreate();
+
+function _generateOverwrite() {
+      var cmd = 'cat > "' + activityInput.file +'" << \'SNC_RBA_FILE_WRITE_ACTIVITY_EOF\';\n' +
+                activityInput.contents + '\n' +
+                'SNC_RBA_FILE_WRITE_ACTIVITY_EOF\n\n' +
+                'RETCODE=$?; echo "%%return_code%%"; echo $RETCODE; echo "%%"\n';
+      return cmd;
+}
+
+function _generateAppend() {
+      var cmd = 'cat >> "' + activityInput.file +'" << \'SNC_RBA_FILE_WRITE_ACTIVITY_EOF\';\n' +
+                activityInput.contents + '\n' +
+                'SNC_RBA_FILE_WRITE_ACTIVITY_EOF\n\n' +
+                'RETCODE=$?; echo "%%return_code%%"; echo $RETCODE; echo "%%"\n';
+      return cmd;
+}
+
+function _generateCreate() {
+      var cmd = 'if [ -f "' + activityInput.file +'" ]; then\n' +
+                '    echo "%%return_code%%"; echo 1; echo "%%"\n' +
+                'else\n' +
+                '    cat > "' + activityInput.file +'" << \'SNC_RBA_FILE_WRITE_ACTIVITY_EOF\';\n' +
+                activityInput.contents + '\n' +
+                'SNC_RBA_FILE_WRITE_ACTIVITY_EOF\n\n' +
+                '    RETCODE=$?; echo "%%return_code%%"; echo $RETCODE; echo "%%"\n' +
+                'fi\n';
+      return cmd;
+}]]></input_process_script>
+        <input_transform>{"source":"${activityInput.hostname}","command":"","directory":"${activityInput.directory}","credential_tag":"${activityInput.TAG}","midCapabilities":"1566310bdb84d304107172e9bf961962","long_running":"false","must_sudo":"false"}</input_transform>
+        <local_variables/>
+        <name>SFTPfileWrite</name>
+        <output_meta>{"name":"Output","type":"DATA_OBJECT","properties":[{"name":"return_code","type":"STRING"},{"name":"error_message","type":"STRING"}]}</output_meta>
+        <output_process_script/>
+        <output_transform>[{"toLink":"activityOutput.return_code","description":"Execution return","to":"return_code","toType":"string","toDestination":"activityOutput","sourceLabel":"executionResult.tags[\"return_code\"]","from":"${executionResult.tags[\"return_code\"]}","fromSource":"executionResult","type":"Direct","children":"[]","translation":""},{"toLink":"activityOutput.error_message","description":"Error message","to":"error_message","toType":"string","toDestination":"activityOutput","sourceLabel":"executionResult.errorMessages","from":"${executionResult.errorMessages}","fromSource":"executionResult","type":"Direct","children":"[]","translation":""}]</output_transform>
+        <processing_script/>
+        <sample_payloads>{}</sample_payloads>
+        <short_description>Write a file on a Linux or Unix Computer</short_description>
+        <style/>
+        <sys_class_name>wf_element_activity</sys_class_name>
+        <sys_created_by>admin.xxnavrac</sys_created_by>
+        <sys_created_on>2018-03-01 09:10:05</sys_created_on>
+        <sys_customer_update>false</sys_customer_update>
+        <sys_id>f4bcf5cadbac1f00107172e9bf961988</sys_id>
+        <sys_mod_count>3</sys_mod_count>
+        <sys_name>SFTPfileWrite</sys_name>
+        <sys_package display_value="SFTP Integration" source="x_tieoy_sftp_integ">01d988b6dbc8dfc0107172e9bf96195e</sys_package>
+        <sys_policy/>
+        <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
+        <sys_scope display_value="SFTP Integration">01d988b6dbc8dfc0107172e9bf96195e</sys_scope>
+        <sys_update_name>wf_element_activity_f4bcf5cadbac1f00107172e9bf961988</sys_update_name>
+        <sys_updated_by>admin.xxnavrac</sys_updated_by>
+        <sys_updated_on>2018-03-01 09:34:02</sys_updated_on>
+        <version_container_id>f7ec35cadbac1f00107172e9bf961925</version_container_id>
+    </wf_element_activity>
+    <sys_translated_text action="delete_multiple" query="documentkey=f4bcf5cadbac1f00107172e9bf961988"/>
+    <wf_versionable action="INSERT_OR_UPDATE">
+        <checked_out/>
+        <checked_out_by/>
+        <published>true</published>
+        <sys_created_by>admin.xxnavrac</sys_created_by>
+        <sys_created_on>2018-03-01 09:10:06</sys_created_on>
+        <sys_id>3bec35cadbac1f00107172e9bf961926</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_updated_by>admin.xxnavrac</sys_updated_by>
+        <sys_updated_on>2018-03-01 09:34:02</sys_updated_on>
+        <valid_from>2018-03-01 09:34:02</valid_from>
+        <valid_to/>
+        <version>1</version>
+        <version_container_id>f7ec35cadbac1f00107172e9bf961925</version_container_id>
+        <wf_element_definition display_value="SFTPfileWrite">f4bcf5cadbac1f00107172e9bf961988</wf_element_definition>
+    </wf_versionable>
+    <wf_condition_default action="INSERT_OR_UPDATE">
+        <activity_definition display_value="SFTPfileWrite">f4bcf5cadbac1f00107172e9bf961988</activity_definition>
+        <condition/>
+        <derived_definition/>
+        <else_flag>true</else_flag>
+        <error>false</error>
+        <event>false</event>
+        <event_name/>
+        <name>Failure</name>
+        <order>200</order>
+        <short_description/>
+        <skip_during_generate>false</skip_during_generate>
+        <sys_created_by>admin.xxnavrac</sys_created_by>
+        <sys_created_on>2018-03-01 09:33:47</sys_created_on>
+        <sys_id>21024a8adbec1f00107172e9bf961941</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin.xxnavrac</sys_updated_by>
+        <sys_updated_on>2018-03-01 09:33:47</sys_updated_on>
+    </wf_condition_default>
+    <wf_condition_default action="INSERT_OR_UPDATE">
+        <activity_definition display_value="SFTPfileWrite">f4bcf5cadbac1f00107172e9bf961988</activity_definition>
+        <condition>activityOutput.return_code == "0"</condition>
+        <derived_definition/>
+        <else_flag>false</else_flag>
+        <error>false</error>
+        <event>false</event>
+        <event_name/>
+        <name>Success</name>
+        <order>100</order>
+        <short_description/>
+        <skip_during_generate>false</skip_during_generate>
+        <sys_created_by>admin.xxnavrac</sys_created_by>
+        <sys_created_on>2018-03-01 09:33:47</sys_created_on>
+        <sys_id>b8fc3d0edbac1f00107172e9bf961992</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin.xxnavrac</sys_updated_by>
+        <sys_updated_on>2018-03-01 09:33:47</sys_updated_on>
+    </wf_condition_default>
+</record_update>
